@@ -1,18 +1,44 @@
 const { Schema, model } = require('mongoose');
+const validators = require ('mongoose-validators') ;
 
 const UserSchema = new Schema({
     userName: {
-        type: String
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
     },
     email: {
-        type: String
+        type: String,
+        required: true,
+        unique: true,
+        validate: validators.isEmail()
+    },
+    thoughts: [
+        {
+       type: Schema.Types.ObjectId, 
+       ref: 'Thought'
+        }
+    ],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
+}, 
+    {
+        toJSON: {
+            virtuals:true,
+            getters: true
+        },
+        id: false
     }
-    // thoughts: {
-    // type:String 
-    // },
-    // friends: {
-    // type: String
-    // }
+);
+
+// Get total number of friends on retrieval
+UserSchema.virtual('friendCount').get(function() {
+    return this.thoughts.reduce((total, thought) => total + thought.replies.length + 1, 0);
 });
 
 // create the User model using the UserSchema
