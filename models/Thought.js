@@ -47,15 +47,15 @@ const ThoughtSchema = new Schema({
         required: true
     },
     // Use reactionSchema to validate data for a reaction
-    // replies: [reactionSchema]
-    },
+    // reaction: [reactionSchema]
+    // },
     // {
     //     toJSON: {
     //         virtuals: true,
     //         getters: true
     //     },
     //     id: false
-    // }
+    }
 );
 
 // get total reaction count
