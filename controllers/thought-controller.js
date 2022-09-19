@@ -4,6 +4,7 @@ const thoughtController = {
     // get all thoughts
     getAllThoughts(req,res) {
         Thought.find({})
+        .sort({ _id: -1 })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);
