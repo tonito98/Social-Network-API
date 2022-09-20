@@ -6,7 +6,7 @@ const addDateSuffix = date => {
 
     if (lastChar === '1' && dateStr !== '11') {
         dateStr = `${dateStr}st`;
-    } else if (lastCar === '2' && dateStr !== '12') {
+    } else if (lastChar === '2' && dateStr !== '12') {
         dateStr = `${dateStr}nd`;
     } else if (lastChar === '3' && dateStr !== '13') {
         dateStr = `${dateStr}rd`;
